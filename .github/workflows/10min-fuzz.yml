@@ -1,5 +1,5 @@
 name: fuzz-for-10mins
-on: [pull-request]
+on: [pull_request]
 jobs:
   fuzzing:
     runs-on: ubuntu-latest
