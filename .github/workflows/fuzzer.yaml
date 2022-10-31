@@ -1,0 +1,17 @@
+name: fuzz-for-10mins
+on: [pull-request]
+jobs:
+  fuzzing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Prepare Environment
+        run: apt install clang
+        run: apt install libgss-dev
+      - name: Fuzzing
+        uses: ./
+        id: fuzzing
+        with:
+          fuzz-time: 600 #Fuzzing time in seconds
+
