@@ -9,5 +9,5 @@ jobs:
       - name: Prepare Environment
         run: sudo apt install clang libgss-dev
       - name: Fuzzing
-        run: ./fuzzer/build-and-fuzz.sh 600
+        run: ./fuzzer/build-and-fuzz.sh 10
 
