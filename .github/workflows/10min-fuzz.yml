@@ -1,5 +1,5 @@
 name: fuzz-for-10mins
-on: [pull_request]
+on: [push]
 jobs:
   fuzzing:
     runs-on: ubuntu-latest
@@ -10,8 +10,5 @@ jobs:
         run: apt install clang
         run: apt install libgss-dev
       - name: Fuzzing
-        uses: ./
-        id: fuzzing
-        with:
-          fuzz-time: 600 #Fuzzing time in seconds
+        run: ./fuzzing/build-and-fuzz.sh 60
 
