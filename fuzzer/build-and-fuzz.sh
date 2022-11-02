@@ -1,7 +1,7 @@
 #!/bin/bash
 
-CC=clang-14
-CXX=clang++-14
+CC=clang
+CXX=clang++
 CXXFLAGS='-O2 -fno-omit-frame-pointer -gline-tables-only -fsanitize=address,fuzzer-no-link -fsanitize-address-use-after-scope'
 JOBS=$(nproc)
 
