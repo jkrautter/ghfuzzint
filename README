@@ -11,6 +11,8 @@
 1* Why ?
 -_-_-_-_-_
 
+modifications for pull request testing
+
 Why not ? :) I've began to work on my own implementation of the ssh protocol
 because i didn't like the currently public ones.
 Not any allowed you to import and use the functions as a powerful library, 
