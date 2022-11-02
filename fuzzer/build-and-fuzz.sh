@@ -2,6 +2,7 @@
 
 CC=clang
 CXX=clang++
+CFLAGS='-O2 -fno-omit-frame-pointer -gline-tables-only -fsanitize=address,fuzzer-no-link -fsanitize-address-use-after-scope'
 CXXFLAGS='-O2 -fno-omit-frame-pointer -gline-tables-only -fsanitize=address,fuzzer-no-link -fsanitize-address-use-after-scope'
 JOBS=$(nproc)
 
@@ -17,9 +18,13 @@ cmake -DCMAKE_C_COMPILER="$CC" \
       -DWITH_STATIC_LIB=ON ../..
 make -j $JOBS
 cd ..
-$CXX $CXXFLAGS -std=c++11 fuzzer.cc -I ../include/ ./BUILD/src/libssh.a -fsanitize=address,fuzzer -lcrypto -lgss -lz -o fuzzer
+$CXX $CXXFLAGS -std=c++11 fuzzer.cc -I ../include/ ./BUILD/src/libssh.a -fsanitize=fuzzer -lcrypto -lgss -lz -o fuzzer
 rm -rf BUILD
 rm -rf CORPUS
 mkdir CORPUS
 [ -e ./fuzzer ] && ./fuzzer -max_len=60 -artifact_prefix=CORPUS/ -jobs=$JOBS -workers=$JOBS -max_total_time=$1 ./CORPUS
-grep "ERROR: LeakSanitizer: detected memory leaks" fuzz-*.log || exit 1 
+grep "ERROR: LeakSanitizer: detected memory leaks" fuzz-*.log || echo "Fuzzer did not detect memory leaks!"
+rm fuzz-*.log
+rm -rf CORPUS
+rm fuzzer
+exit 0
