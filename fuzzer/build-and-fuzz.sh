@@ -5,6 +5,7 @@ CXX=clang++-14
 CXXFLAGS='-O2 -fno-omit-frame-pointer -gline-tables-only -fsanitize=address,fuzzer-no-link -fsanitize-address-use-after-scope'
 JOBS=$(nproc)
 
+cd fuzzer
 rm -rf BUILD
 set -ex
 mkdir BUILD
